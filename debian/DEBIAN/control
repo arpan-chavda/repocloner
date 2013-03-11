@@ -1,0 +1,9 @@
+Package: repocloner
+Version: 0.9
+Section: base
+Priority: optional
+Architecture: all
+Depends: yad
+Maintainer: Arpan Chavda <codejarcc@gmail.com>
+Description: Repository Cloner
+ This package is a local APT repository generator.

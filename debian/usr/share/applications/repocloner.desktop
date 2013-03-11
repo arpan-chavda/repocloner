@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=0.9
+Name=Repocloner
+Comment=APT Generator Utility
+GenericName=Repocloner
+Exec=/usr/bin/repocloner
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Categories=GNOME;System;
+

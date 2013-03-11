@@ -1,0 +1,35 @@
+#! /bin/sh
+
+YAD1="yad --width=400 --height=100"
+YAD2="yad --width=525 --height=100"
+my=`$YAD1 --title="RepoCloner" --form --field="Server Address" --field="Local Server Directory:DIR"  --button="Next:0" --button="gtk-quit:1"`
+ret=$?
+#echo $ret
+test_dir="/home/dml-dev/Documents/app-dev/repocloner"
+fy=`$YAD2 --title="Debian Source" --form --field="Specify your directory of debian packages:DIR" --button="Generate:0" --button="gtk-quit:1"`;
+ 
+#echo $fy
+#echo $my
+rm tmpf 2> /dev/null;
+rm tmp 2> /dev/null;
+echo $my >> tmp;
+echo $fy >> tmpf;
+deb_dir=`awk -F '|' '{printf "%s",$1}' tmpf`;
+
+local_dir=`awk -F '|' '{printf "%s",$2}' tmp` ;
+server_add=`awk -F '|' '{printf "%s",$1}' tmp`;
+
+
+#echo "Printing stored variables";
+#echo $local_dir;
+#echo $deb_dir;
+#echo $local_dir;
+#echo $server_add;
+
+cp $deb_dir/* $local_dir/ 2> dev/null;
+dpkg-scanpackages $local_dir /dev/null > $local_dir/Packages 2> dev/null
+
+echo "deb $server_add ./" > $test_dir/deb_creator/debian/etc/apt/sources.list.d/local.list
+
+$YAD1 --title="Completed" --text="Successfully done! Look out your home directory for client side debian package."  --button="gtk-quit:1"
+exit
